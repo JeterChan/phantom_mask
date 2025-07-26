@@ -19,14 +19,14 @@
 ### A.2. API Document
 > Please describe how to use the API in the API documentation. You can edit by any format (e.g., Markdown or OpenAPI) or free tools (e.g., [hackMD](https://hackmd.io/), [postman](https://www.postman.com/), [google docs](https://docs.google.com/document/u/0/), or  [swagger](https://swagger.io/specification/)).
 
-Import [this](#api-document) json file to Postman.
+Import [this](./api-document.json) json file to Postman.
 
 ### A.3. Import Data Commands
 Please run these two script commands to migrate the data into the database.
 
 ```bash
 $ node scripts/pharmacy_ETL.js
-$ rake scripts/user_ETL.js
+$ node scripts/user_ETL.js
 ```
 ## B. Bonus Information
 
@@ -47,13 +47,12 @@ Please check my Dockerfile / docker-compose.yml at [here](#dockerized).
 On the local machine, please follow the commands below to build it.
 
 ```bash
-$ docker build --build-arg ENV=development -p 80:3000 -t my-project:1.0.0 .  
-$ docker-compose up -d
+$ docker-compose up --build -d
 
 # go inside the container, run the migrate data command.
-$ docker exec -it my-project bash
-$ rake import_data:pharmacies[PATH_TO_FILE] 
-$ rake import_data:user[PATH_TO_FILE]
+$ docker exec -it phantom_web sh
+$ node scripts/pharmacy_ETL.js
+$ node scripts/user_ETL.js
 ```
 
 ### B.3. Demo Site Url
